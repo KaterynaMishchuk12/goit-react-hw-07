@@ -4,4 +4,9 @@
   align-items: flex-start;
   gap: 4px;
   padding: 6px 4px;
+  font-size: 18px;
+}
+.searchForm input {
+  border: 1px solid black;
+  border-radius: 4px;
 }

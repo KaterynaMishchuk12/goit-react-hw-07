@@ -1,7 +1,7 @@
 import { BiSolidUser } from "react-icons/bi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import css from "./Contact.module.css";
-import { deleteContact } from "../redux/contactsSlice";
+import { deleteContact } from "../redux/operations";
 import { useDispatch } from "react-redux";
 
 export const Contact = ({ name, number, id }) => {
@@ -28,3 +28,4 @@ export const Contact = ({ name, number, id }) => {
     </li>
   );
 };
+// Contact.jsx

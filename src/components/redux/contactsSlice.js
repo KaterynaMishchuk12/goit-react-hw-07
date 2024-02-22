@@ -1,30 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts, deleteContact } from "./operations";
 
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
+    contacts: [],
+    loading: false,
+    error: false,
   },
-  reducers: {
-    addContact: (state, action) => {
-      state.contacts.push(action.payload);
-    },
-
-    deleteContact: {
-      reducer(state, action) {
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchContacts.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        (state.loading = false), (state.contacts = action.payload);
+      })
+      .addCase(fetchContacts.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+      .addCase(deleteContact.pending, () => {})
+      .addCase(deleteContact.fulfilled, (state, action) => {
         state.contacts = state.contacts.filter(
-          (contact) => contact.id !== action.payload
+          (contact) => contact.id !== action.payload.id
         );
-      },
-    },
-  },
+      })
+      .addCase(deleteContact.rejected, () => {}),
 });
 
-//  експортуємо генератори екшенів та редюсер
-export const { addContact, deleteContact } = contactsSlice.actions;
+//  експортуємо генератор редюсер
 export const contactsReducer = contactsSlice.reducer;

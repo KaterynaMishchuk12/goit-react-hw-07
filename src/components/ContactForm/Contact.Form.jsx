@@ -3,9 +3,9 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
 import css from "./ContactForm.module.css";
-import { getContact } from "../redux/selectors";
+import { selectContact } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from "../redux/contactsSlice";
+import { addContact } from "../redux/operations";
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,9 +27,8 @@ export const ContactForm = () => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  const contacts = useSelector(getContact);
+  const contacts = useSelector(selectContact);
   const dispatch = useDispatch();
-  console.log(contacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const alreadyExists = contacts.some(
@@ -40,7 +39,7 @@ export const ContactForm = () => {
       alert(`${values.name} already exists!`);
     } else {
       const newContact = {
-        ...values,
+        values,
         id: nanoid(),
       };
       dispatch(addContact(newContact));
