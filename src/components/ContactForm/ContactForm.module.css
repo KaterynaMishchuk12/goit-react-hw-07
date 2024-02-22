@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 6px;
+  gap: 8px;
+  align-items: flex-start;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+.error {
+  color: red;
+  font-size: 10px;
+  text-shadow: 1px 1px 2px #fff;
+  padding: 2px;
+}
+
+.button {
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
