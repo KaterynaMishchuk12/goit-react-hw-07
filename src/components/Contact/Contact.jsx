@@ -28,4 +28,3 @@ export const Contact = ({ name, number, id }) => {
     </li>
   );
 };
-// Contact.jsx

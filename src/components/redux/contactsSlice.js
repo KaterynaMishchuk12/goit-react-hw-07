@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, deleteContact } from "./operations";
+import { fetchContacts, deleteContact, addContact } from "./operations";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -21,6 +21,13 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = true;
       })
+      .addCase(addContact.pending, () => {})
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.contacts.push(action.payload);
+      })
+      .addCase(addContact.rejected, () => {})
       .addCase(deleteContact.pending, () => {})
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.contacts = state.contacts.filter(
@@ -30,5 +37,4 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.rejected, () => {}),
 });
 
-//  експортуємо генератор редюсер
 export const contactsReducer = contactsSlice.reducer;

@@ -14,7 +14,6 @@ export const ContactList = () => {
   return (
     <div>
       <ul className={css.list}>
-        {console.log(searchedContacts)}
         {searchedContacts.map((contact) => (
           <Contact
             id={contact.id}
@@ -27,4 +26,3 @@ export const ContactList = () => {
     </div>
   );
 };
-// ContactList.jsx
